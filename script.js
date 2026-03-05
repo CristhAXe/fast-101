@@ -48,3 +48,55 @@ function validarFormulario() {
   form.reset();
   return true;
 }   
+
+function validarEmail(email) {
+  // Verifica que tenga @ y un punto después del @
+  const arroba = email.indexOf('@');
+  const punto = email.lastIndexOf('.');
+  return arroba > 0 && punto > arroba + 1 && punto < email.length - 1;
+}
+
+function mostrarError(mensaje) {
+  feedback.textContent = mensaje;
+  feedback.className = 'form-feedback error';
+}
+
+function mostrarExito(mensaje) {
+  feedback.textContent = mensaje;
+  feedback.className = 'form-feedback success';
+}
+
+form.addEventListener('submit', function(evento) {
+  evento.preventDefault();
+  validarFormulario();
+});
+
+/* =========================
+   MENÚ MÓVIL (HAMBURGUESA)
+   ========================= */
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+function toggleMenu() {
+  navLinks.classList.toggle('active');
+
+  // Cambiar icono del botón
+  if (navLinks.classList.contains('active')) {
+    navToggle.textContent = '✕';
+  } else {
+    navToggle.textContent = '☰';
+  }
+}
+
+navToggle.addEventListener('click', toggleMenu);
+
+
+// Cerrar menú al hacer clic en un enlace
+const navItems = document.querySelectorAll('.nav-links a');
+
+navItems.forEach(function(enlace) {
+  enlace.addEventListener('click', function() {
+    navLinks.classList.remove('active');
+    navToggle.textContent = '☰';
+  });
+});
